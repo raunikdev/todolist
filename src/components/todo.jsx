@@ -1,9 +1,26 @@
 import './todo.css'
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 
 function Todo() {
     const [textbox, Settextbox] = useState("");
     const [task, Settask] = useState([]);
+    useEffect(() => {
+        const storedTasks = localStorage.getItem("tasks");
+        if (storedTasks) {
+            const parsed = JSON.parse(storedTasks);
+            console.log("Loaded tasks:", parsed);         // ✅ Important
+            console.log("typeof parsed:", typeof parsed); // ✅ Should be "object"
+            console.log("isArray:", Array.isArray(parsed)); // ✅ Should be true
+            Settask(parsed);
+        }
+    }, []);
+
+
+    useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(task));
+        console.log("Tasks saved:", task);
+    }, [task]);
+
 
     const addTask = () => {
         if (textbox === "") {
@@ -32,6 +49,12 @@ function Todo() {
         const filteredTasks = task.filter((_, i) => i !== index);
         Settask(filteredTasks);
     };
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+            addTask();
+        }
+    };
+
 
 
     return (
@@ -45,6 +68,8 @@ function Todo() {
                         placeholder="Type something..."
                         onChange={textboxHandler}
                         className='input-box'
+                        onKeyDown={handleKeyPress}
+
                     />
                     <button onClick={addTask} className='add-button'>Add</button>
                 </div>
