@@ -28,18 +28,25 @@ function Todo() {
         });
         Settask(updatedTasks);
     };
+    const xClickHandler = (index) => {
+        const filteredTasks = task.filter((_, i) => i !== index);
+        Settask(filteredTasks);
+    };
+
 
     return (
         <>
             <div className="todoall">
+                <h1>To Do List: </h1>
                 <div className="div">
                     <input
                         type="text"
                         value={textbox}
-                        placeholder="type something..."
+                        placeholder="Type something..."
                         onChange={textboxHandler}
+                        className='input-box'
                     />
-                    <button onClick={addTask}>Add</button>
+                    <button onClick={addTask} className='add-button'>Add</button>
                 </div>
                 <ul className="tasks">
                     {task.map((tasks, index) => (
@@ -53,9 +60,11 @@ function Todo() {
                                     readOnly
                                 />
                             </div>
-                            <span className={tasks.completed ? "completed" : ""}>
+                            <span className={tasks.completed ? "completed" : "not-completed"}>
                                 {tasks.text}
                             </span>
+                            <span   className='x'
+                                    onClick={() => xClickHandler(index)}>x</span>
                         </li>
                     ))}
                 </ul>

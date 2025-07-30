@@ -9,11 +9,19 @@ p{
 .tasks{
     list-style-type: none;
     padding-left: 0px;
+    flex:1;
 }
 .list-checkbox{
     display: flex;
+    flex-direction: row;
     align-items: center;
-    
+    /* justify-content: left; */
+    /* display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    display: flex;
+    align-items: center;
+    justify-content: left;  */
+        
     /* gap: 20px; */
 }
 .checkbox{
@@ -22,4 +30,28 @@ p{
 .completed {
   text-decoration: line-through;
   color: gray;
+  flex: 1;
+}
+.not-completed{
+    flex: 1;
+}
+.x {
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 10px;
+  /* flex: 1; */
+}
+.input-box{
+    width: 200px;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    margin-right: 10px;
+}
+.add-button{
+    background-color: orange;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
 }
